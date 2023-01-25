@@ -32,11 +32,16 @@ $router->map('GET','/user/[i:id]', 'userController#show');
 //$router->map('GET','/user/create','userController#create');
 $router->map('GET','/user/create','create');
 $router->map('POST','/user','userController#store');
+$router->map('GET','/user/[i:id]/edit', 'userController#edit');
+$router->map('PUT','/user/[i:id]','userController#update');
+$router->map('DELETE','/user/[i:id]','userController#destroy');
 
 
-
+//Change method PUT and DELETE
+if (isset($_POST['_METHOD'])) {
+    $_SERVER['REQUEST_METHOD'] = $_POST['_METHOD'];
+}
 //End of List
-
 $match = $router->match();
 if($match) {
  $target = $match["target"];

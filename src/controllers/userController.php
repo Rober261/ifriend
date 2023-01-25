@@ -24,13 +24,17 @@ class userController
   // {
   //   global $blade;
   //   echo $blade->view()->make('create')->render();
-
   // }
-
   // Store a newly created resource in storage.
   public function store()
   {
-    var_dump($_POST);
+    $name = $_POST['name'];
+    $password = $_POST['password'];
+    $user =  new User;
+    $user->name = $name;
+    $user->password = $password;
+    $user->save();
+    header("Location:/user");
   }
 
   // Display the specified resource.
@@ -48,17 +52,31 @@ class userController
   }
 
   //Show the form for editing the specified resource.
-  public function edit($id)
+  public function edit($param)
   {
+    $id = $param['id'];
+    $user = User::find($id);
+    global $blade;
+    echo $blade->view()->make('edit',compact('user'))->render();
   }
 
   //Update the specified resource in storage.
-  public function update($id)
+  public function update($param)
   {
+    $id = $param['id'];
+    $user = User::find($id);
+    $user->name = $_POST["name"];
+    $user->password = $_POST["password"];
+    $user->save();
+    header("Location:/user");
   }
 
   //Remove the specified resource from storage.
-  public function destroy($id)
+  public function destroy($param)
   {
+    $id = $param['id'];
+    $user = User::find($id);
+    $user->delete();
+    header("Location:/user");
   }
 }
