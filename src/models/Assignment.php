@@ -1,12 +1,9 @@
 <?php
-
 namespace Dsw\Ifriend\Models;
 
 use Illuminate\Database\Eloquent\Model;
- 
-class User extends Model
-{
-  //  protected $table = 'users';
-}
 
-?>
+class Assignment extends Model 
+{
+  protected $table = 'assignments';
+}

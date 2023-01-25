@@ -1,6 +1,7 @@
 <?php 
 require_once '../vendor/autoload.php';
 
+session_start();
 //Rollo para las plantillas
 use Philo\Blade\Blade;
 
@@ -9,13 +10,15 @@ $cache = '../cache';
 
 $blade = new Blade($views, $cache);
 
-
-
 //Fin rollo plantilla
 
-//Router System
+//Router Systemno iniciado
 $router = new AltoRouter();
 
+//Change method PUT and DELETE
+if (isset($_POST['_METHOD'])) {
+    $_SERVER['REQUEST_METHOD'] = $_POST['_METHOD'];
+}
 
 //List of routes
 // $router->map('GET','/', function(){
@@ -25,22 +28,32 @@ $router = new AltoRouter();
 //   global $blade;
 //   echo $blade->view()->make('home')->render();
 // });
-
+//User
 $router->map('GET','/', 'home');
+$router->map('GET','/login', 'login.login');
+$router->map('POST','/login', 'loginController#login');
+$router->map('GET','/logout', 'loginController#logout');
+
+
+if (isset($_SESSION['id'])) {
 $router->map('GET','/user', 'userController#index');
 $router->map('GET','/user/[i:id]', 'userController#show');
 //$router->map('GET','/user/create','userController#create');
-$router->map('GET','/user/create','create');
+$router->map('GET','/user/create','user.create');
 $router->map('POST','/user','userController#store');
 $router->map('GET','/user/[i:id]/edit', 'userController#edit');
 $router->map('PUT','/user/[i:id]','userController#update');
 $router->map('DELETE','/user/[i:id]','userController#destroy');
+//Parties
+$router->map('GET','/party', 'partyController#index');
+$router->map('GET','/party/[i:id]', 'partyController#show');
+$router->map('GET','/party/create', 'partyController#create');
+$router->map('POST','/party','partyController#store');
 
-
-//Change method PUT and DELETE
-if (isset($_POST['_METHOD'])) {
-    $_SERVER['REQUEST_METHOD'] = $_POST['_METHOD'];
 }
+
+
+
 //End of List
 $match = $router->match();
 if($match) {

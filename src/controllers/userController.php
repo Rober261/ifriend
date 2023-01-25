@@ -16,7 +16,7 @@ class userController
     $users = User::all();
     
     global $blade;
-    echo $blade->view()->make('list',compact('users'))->render();
+    echo $blade->view()->make('user.list',compact('users'))->render();
   }
 
   // Show the form for creating a new resource.
@@ -44,7 +44,7 @@ class userController
     $user = User::find($id);
     if ($user) {
     global $blade;
-    echo $blade->view()->make('show',compact('user'))->render();
+    echo $blade->view()->make('user.show',compact('user'))->render();
 
     }else{
       echo "<h1>Usuario no encontrado</h1>";
@@ -57,7 +57,7 @@ class userController
     $id = $param['id'];
     $user = User::find($id);
     global $blade;
-    echo $blade->view()->make('edit',compact('user'))->render();
+    echo $blade->view()->make('user.edit',compact('user'))->render();
   }
 
   //Update the specified resource in storage.
