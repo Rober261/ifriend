@@ -16,6 +16,14 @@ public function index(){
   global $blade;
   echo $blade->view()->make('party.list',compact('parties'))->render();
 }
+
+public function show($param){
+  $id = $param['id'];
+  $parties = Assignment::where('party_id',$id)->get();
+  global $blade;
+  echo $blade->view()->make('party.show',compact('parties'))->render();
+}
+
 public function store(){
   $party = new Party;
     $party->name = $_POST['name'];
@@ -32,6 +40,7 @@ public function store(){
     }
     header('Location: /party');
 }
+
 public function create() {
   $users = \Dsw\Ifriend\models\User::all();
   global $blade;
