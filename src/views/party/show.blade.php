@@ -4,12 +4,27 @@
 @section('content')
     <h2>Asignación de regalos</h2>
     
-    <div class="row">  
+    <div class="row">
+      
+      <h6>Id usuarios</h6>  
       @foreach ($parties as $party)
-          {{-- @foreach ($party as $pa)
-              {{$pa}}
-          @endforeach --}}
-          <h1>{{$party->user_to}}->{{$party->user_from}}</h1>
+          <h1>
+            {{$party->user_from}}->{{$party->user_to}}
+            {{-- @foreach ($users as $user)
+              
+              // echo "vuelta";
+              // if ($party->user_from === $user->id) {
+              //   echo  "[" . $user->name . "]" ;
+              // }else{
+              //   echo $user->id;
+              // }
+              // if ($party->user_to === $user->id) {
+              //   echo "{". $user->name . "}";
+              // }
+            
+            @endforeach --}}
+
+          </h1>
       @endforeach
         <a href="/party" class="btn btn-primary mt-2"> Volver Atras</a>    
     </div>

@@ -2,10 +2,16 @@
 <?php $__env->startSection('content'); ?>
     <h2>Asignación de regalos</h2>
     
-    <div class="row">  
+    <div class="row">
+      
+      <h6>Id usuarios</h6>  
       <?php $__currentLoopData = $parties; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $party): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-          
-          <h1><?php echo e($party->user_to); ?>-><?php echo e($party->user_from); ?></h1>
+          <h1>
+            <?php echo e($party->user_from); ?>-><?php echo e($party->user_to); ?>
+
+            
+
+          </h1>
       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         <a href="/party" class="btn btn-primary mt-2"> Volver Atras</a>    
     </div>

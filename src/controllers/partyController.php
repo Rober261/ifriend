@@ -6,7 +6,7 @@
 
 use Dsw\Ifriend\models\Party;
 use Dsw\Ifriend\models\Assignment;
-
+use Dsw\Ifriend\models\User;
 
 class partyController
 {
@@ -20,8 +20,9 @@ public function index(){
 public function show($param){
   $id = $param['id'];
   $parties = Assignment::where('party_id',$id)->get();
+  $users = User::all();
   global $blade;
-  echo $blade->view()->make('party.show',compact('parties'))->render();
+  echo $blade->view()->make('party.show',compact('parties','users'))->render();
 }
 
 public function store(){
